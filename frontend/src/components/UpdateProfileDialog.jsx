@@ -19,10 +19,10 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         'JavaScript','React','Node.js','Express','MongoDB','Python','Django','Java','C++','SQL','TypeScript','AWS','Docker','Kubernetes','Vue.js','Angular','Spring Boot','PHP','Ruby','Go','Rust','C#','.NET','GraphQL','REST API','Git','Linux','Windows','MacOS','Firebase','PostgreSQL','MySQL','Redis','Elasticsearch','Kubernetes','Jenkins','GitLab','GitHub','Bitbucket','JIRA','Figma','Bootstrap','Tailwind CSS','SASS','HTML5','CSS3','jQuery','Axios','Testing','Jest','Mocha','Cypress','REST','SOAP','OAuth','JWT','Microservices','API Design'
     ];
     const JOB_TITLES = [
-        'Frontend Developer','Backend Developer','Fullstack Developer','Data Scientist','DevOps Engineer','Product Manager','QA Engineer','Mobile Developer','iOS Developer','Android Developer','UI/UX Designer','Database Administrator','Network Engineer','Security Engineer','System Administrator','Solutions Architect','Technical Lead','Engineering Manager','Scrum Master','Business Analyst','Data Analyst','Machine Learning Engineer','Cloud Architect','Site Reliability Engineer'
+        'Software Engineer','Frontend Developer','Backend Developer','Fullstack Developer','Data Scientist','DevOps Engineer','Product Manager','QA Engineer','Mobile Developer','iOS Developer','Android Developer','UI/UX Designer','Database Administrator','Network Engineer','Security Engineer','System Administrator','Solutions Architect','Technical Lead','Engineering Manager','Scrum Master','Business Analyst','Data Analyst','Machine Learning Engineer','Cloud Architect','Site Reliability Engineer'
     ];
     const LOCATIONS = [
-        'Bengaluru','Hyderabad','Pune','Chennai','Mumbai','New Delhi','Gurugram','Noida','Kolkata','Ahmedabad','Lucknow','Jaipur','Surat','Nagpur','Indore','Bhopal','Thiruvananthapuram','Kochi','Coimbatore','Visakhapatnam','Bhubaneswar','Chandigarh','Vadodara','Rajkot','Patna','Aurangabad','Vijayawada','Madurai','Mysore','Dehradun','Ranchi','Remote','Anywhere'
+        'Bengaluru','Hyderabad','Pune','Chennai','Mumbai','New Delhi','Gurugram','Noida','Kolkata','Ahmedabad','Lucknow','Jaipur','Surat','Nagpur','Indore','Bhopal','Thiruvananthapuram','Kochi','Coimbatore','Visakhapatnam','Bhubaneswar','Chandigarh','Vadodara','Rajkot','Patna','Aurangabad','Vijayawada','Madurai','Mysore','Dehradun','Ranchi', 'Remote', 'Anywhere'
     ];
 
     const [input, setInput] = useState({
@@ -223,13 +223,13 @@ return (
                                     color="blue"
                                 />
                                 {/* Show selected skills one-per-line for easier editing */}
-                                {input.skills && input.skills.length > 0 && (
+                                {/* {input.skills && input.skills.length > 0 && (
                                     <div className="mt-3 flex flex-col gap-2">
                                         {input.skills.map((s, i) => (
                                             <div key={i} className="text-base text-gray-800">{s}</div>
                                         ))}
                                     </div>
-                                )}
+                                )} */}
                             </div>
 
                             <div className="rounded-lg bg-white p-4 shadow-sm border border-blue-100">
@@ -241,13 +241,13 @@ return (
                                     color="green"
                                 />
                                 {/* Show selected job titles one-per-line for easier editing */}
-                                {input.jobTitles && input.jobTitles.length > 0 && (
+                                {/* {input.jobTitles && input.jobTitles.length > 0 && (
                                     <div className="mt-3 flex flex-col gap-2">
                                         {input.jobTitles.map((j, i) => (
                                             <div key={i} className="text-base text-gray-800">{j}</div>
                                         ))}
                                     </div>
-                                )}
+                                )} */}
                             </div>
                         </div>
 
