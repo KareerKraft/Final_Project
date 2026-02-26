@@ -15,15 +15,20 @@ import PostJob from './components/admin/PostJob'
 import Applicants from './components/admin/Applicants'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 import useGetAppliedJobs from './hooks/useGetAppliedJob'
-import Intro from "./pages/Intro";
-import Explore from "./pages/Explore";
+import Intro from "./landing/pages/Intro";
+import Explore from "./landing/pages/Home";
 import RoleSelect from "./pages/RoleSelect";
+import LandingLayout from "./landing/LandingLayout";  
 
 
 const appRouter = createBrowserRouter([
   {
     path: '/',
-    element: <Intro />
+    element: (
+      <LandingLayout>
+        <Intro />
+      </LandingLayout>
+    )
   },
   {
     path: '/explore',

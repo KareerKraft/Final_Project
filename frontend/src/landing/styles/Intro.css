@@ -1,0 +1,70 @@
+/* RESET ONLY FOR INTRO PAGE */
+#intro-container {
+  height: 100vh;
+  width: 100%;
+  background: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* LOGO GROUP */
+#logo-group {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  transition: all 0.5s ease;
+}
+
+.logo-stack {
+  position: relative;
+  width: 150px;
+}
+
+#kk-logo {
+  width: 150px;
+}
+
+#hat {
+  position: absolute;
+  top: -35px;
+  left: 40px;
+  width: 70px;
+}
+
+/* BRAND TEXT */
+.bold-text {
+  font-size: 64px;
+  font-weight: 800;
+  color: #1e5b2c;
+  letter-spacing: 2px;
+}
+
+/* SLOGAN */
+#slogan-container {
+  margin-top: 50px;
+}
+
+#slogan-text {
+  font-size: 64px;
+  font-weight: 800;
+  color: #1e5b2c;
+  opacity: 0;
+}
+
+/* BUTTONS */
+button {
+  padding: 10px 20px;
+  border: none;
+  background: #1e5b2c;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+button:hover {
+  background: #14401f;
+}
