@@ -13,8 +13,8 @@ function Header() {
           <Link to="/about" className="nav-link">ABOUT US</Link>
           <Link to="/help" className="nav-link">HELP</Link>
         </nav>
-        <div className="login-container">
-          <button className="login-btn">login</button>
+        <div className="login-container" style={{ position: 'absolute', top: '10px', right: '10px' }}>
+          <button className="login-btn" onClick={() => window.location.href='/login'}>login</button>
         </div>
       </div>
     </header>
