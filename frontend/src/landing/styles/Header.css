@@ -105,3 +105,28 @@
     font-size: 0.8rem;
   }
 }
+
+/* Header content for Explore page */
+.header-content {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding: 0 2rem;
+}
+
+.header-btn {
+  background: transparent;
+  color: #1f2937;
+  border: 2px solid #22c55e;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.header-btn:hover {
+  background: #22c55e;
+  color: white;
+}

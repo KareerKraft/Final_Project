@@ -17,6 +17,8 @@ import ProtectedRoute from './components/admin/ProtectedRoute'
 import useGetAppliedJobs from './hooks/useGetAppliedJob'
 import Intro from "./landing/pages/Intro";
 import Explore from "./landing/pages/Home";
+import AboutUs from "./landing/pages/AboutUs";
+import Help from "./landing/pages/Help";
 import RoleSelect from "./pages/RoleSelect";
 import LandingLayout from "./landing/LandingLayout";  
 
@@ -33,6 +35,14 @@ const appRouter = createBrowserRouter([
   {
     path: '/explore',
     element: <Explore />
+  },
+  {
+    path: '/aboutus',
+    element: <AboutUs />
+  },
+  {
+    path: '/help',
+    element: <Help />
   },
   {
     path: '/role',

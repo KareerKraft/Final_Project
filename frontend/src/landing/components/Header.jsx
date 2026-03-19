@@ -10,8 +10,8 @@ function Header() {
         </div>
         <nav className="nav-menu">
           <Link to="/" className="nav-link">HOME</Link>
-          <Link to="/about" className="nav-link">ABOUT US</Link>
-          <Link to="/help" className="nav-link">HELP</Link>
+          <Link to="/AboutUs" className="nav-link">ABOUT US</Link>
+          <Link to="/Help" className="nav-link">HELP</Link>
         </nav>
         <div className="login-container" style={{ position: 'absolute', top: '10px', right: '10px' }}>
           <button className="login-btn" onClick={() => window.location.href='/login'}>login</button>
