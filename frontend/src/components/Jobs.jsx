@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './shared/Navbar'
 import Job from './Job';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
@@ -18,6 +19,7 @@ const Jobs = () => {
     const { allJobs = [] } = useSelector(store => store.job || {});
     const { user } = useSelector(store => store.auth);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [filterJobs, setFilterJobs] = useState([]);
     const [selectedJob, setSelectedJob] = useState(null);
     const [isApplied, setIsApplied] = useState(false);
@@ -69,6 +71,7 @@ const Jobs = () => {
 
             if (!user?._id) {
                 toast.error('Please log in to apply for jobs');
+                navigate('/login');
                 return;
             }
 

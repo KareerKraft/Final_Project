@@ -1,70 +1,69 @@
-/* RESET ONLY FOR INTRO PAGE */
 #intro-container {
   height: 100vh;
   width: 100%;
-  background: #f4f4f4;
+  background: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  gap: 30px;
+  cursor: pointer;
 }
 
-/* LOGO GROUP */
+/* Logo area */
 #logo-group {
   display: flex;
   align-items: center;
-  gap: 50px;
-  transition: all 0.5s ease;
+  gap: 15px;
 }
 
 .logo-stack {
   position: relative;
-  width: 150px;
-}
-
-#kk-logo {
-  width: 150px;
 }
 
 #hat {
+  width: 50px;
   position: absolute;
-  top: -35px;
-  left: 40px;
+  top: -20px;
+  left: 10px;
+}
+
+#kk-logo {
   width: 70px;
 }
 
-/* BRAND TEXT */
+/* Text */
 .bold-text {
-  font-size: 64px;
-  font-weight: 800;
-  color: #1e5b2c;
-  letter-spacing: 2px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f5f2f;
 }
 
-/* SLOGAN */
 #slogan-container {
-  margin-top: 50px;
-}
-
-#slogan-text {
-  font-size: 64px;
-  font-weight: 800;
-  color: #1e5b2c;
   opacity: 0;
 }
 
-/* BUTTONS */
-button {
-  padding: 10px 20px;
-  border: none;
-  background: #1e5b2c;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 6px;
+#slogan-text {
+  font-size: 1.8rem;
 }
 
-button:hover {
-  background: #14401f;
+/* Buttons */
+.intro-buttons {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+}
+
+.intro-buttons button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #1f5f2f;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.intro-buttons button:hover {
+  background-color: #174b25;
 }
