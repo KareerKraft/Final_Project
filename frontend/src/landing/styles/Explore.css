@@ -1,0 +1,217 @@
+.explore-page {
+  min-height: calc(100vh - 82px);
+  background:
+    radial-gradient(circle at top left, rgba(34, 197, 94, 0.25), transparent 32%),
+    linear-gradient(135deg, #052e16 0%, #03140b 45%, #0f172a 100%);
+  color: #ffffff;
+}
+
+.explore-hero {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 4.5rem 2rem 5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.explore-copy {
+  max-width: 700px;
+}
+
+.explore-tag {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: rgba(187, 247, 208, 0.14);
+  border: 1px solid rgba(187, 247, 208, 0.35);
+  color: #bbf7d0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.explore-title {
+  margin: 1.25rem 0 1rem;
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+.explore-description {
+  max-width: 620px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.explore-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.explore-primary-btn,
+.explore-secondary-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.95rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.explore-primary-btn {
+  background: linear-gradient(135deg, #22c55e 0%, #86efac 100%);
+  color: #052e16;
+  box-shadow: 0 18px 40px rgba(34, 197, 94, 0.28);
+}
+
+.explore-secondary-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.explore-primary-btn:hover,
+.explore-secondary-btn:hover {
+  transform: translateY(-2px);
+}
+
+.explore-panel {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.explore-panel-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+.explore-panel-card h2 {
+  margin: 0 0 1.4rem;
+  font-size: 1.7rem;
+  line-height: 1.25;
+}
+
+.explore-panel-label {
+  margin: 0 0 0.85rem;
+  color: #86efac;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.explore-feature-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.explore-feature-item {
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: rgba(3, 7, 18, 0.26);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.explore-feature-item strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+}
+
+.explore-feature-item span {
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.explore-bottom-actions {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.explore-bottom-btn {
+  min-width: 220px;
+  border: none;
+  border-radius: 999px;
+  padding: 1rem 1.6rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.explore-bottom-btn:hover {
+  transform: translateY(-2px);
+}
+
+.explore-bottom-btn-primary {
+  background: linear-gradient(135deg, #22c55e 0%, #86efac 100%);
+  color: #052e16;
+  box-shadow: 0 18px 40px rgba(34, 197, 94, 0.28);
+}
+
+.explore-bottom-btn-secondary {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+@media (max-width: 900px) {
+  .explore-hero {
+    grid-template-columns: 1fr;
+    padding: 3rem 1.25rem 4rem;
+  }
+
+  .explore-panel {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .explore-title {
+    font-size: 2.5rem;
+  }
+
+  .explore-description {
+    font-size: 1rem;
+  }
+
+  .explore-panel-card {
+    padding: 1.4rem;
+    border-radius: 22px;
+  }
+
+  .explore-primary-btn,
+  .explore-secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .explore-bottom-actions {
+    padding: 0 1.25rem 3rem;
+  }
+
+  .explore-bottom-btn {
+    width: 100%;
+  }
+}

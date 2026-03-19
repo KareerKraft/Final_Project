@@ -1,34 +1,74 @@
 import { useNavigate } from "react-router-dom";
-import '../styles/Header.css';
+import "../styles/Explore.css";
 
 export default function Explore() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-600 via-black to-green-800 text-white flex flex-col items-center justify-center text-center">
-      <header className="header">
-        <div className="header-content">
-          <button className="header-btn" onClick={() => navigate('/aboutus')}>ABOUT US</button>
-          <button className="header-btn" onClick={() => navigate('/help')}>HELP</button>
+    <main className="explore-page">
+      <section className="explore-hero">
+        <div className="explore-copy">
+          <span className="explore-tag">Career Growth Starts Here</span>
+          <h1 className="explore-title">Build your future with confidence and clarity.</h1>
+          <p className="explore-description">
+            Discover jobs, create a polished resume, and move forward with tools
+            designed for students and early professionals.
+          </p>
+
+          <div className="explore-actions">
+            <button
+              onClick={() => navigate("/role")}
+              className="explore-primary-btn"
+            >
+              Explore Now
+            </button>
+            <button
+              onClick={() => navigate("/aboutus")}
+              className="explore-secondary-btn"
+            >
+              Learn More
+            </button>
+          </div>
         </div>
-      </header>
 
-      <h1 className="text-5xl font-bold mb-6">
-        Build Your Career With Confidence
-      </h1>
+        <div className="explore-panel">
+          <div className="explore-panel-card">
+            <p className="explore-panel-label">What you can do</p>
+            <h2>Everything you need in one place</h2>
+            <div className="explore-feature-list">
+              <div className="explore-feature-item">
+                <strong>Smart job discovery</strong>
+                <span>Browse matching opportunities faster.</span>
+              </div>
+              <div className="explore-feature-item">
+                <strong>Resume building</strong>
+                <span>Create a clean, professional profile.</span>
+              </div>
+              <div className="explore-feature-item">
+                <strong>Easy next steps</strong>
+                <span>Move from planning to applying smoothly.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <p className="max-w-xl mb-8 opacity-80">
-        Apply for jobs seamlessly or build professional resumes.
-        KareerKraft connects students and recruiters efficiently.
-      </p>
-
-      <button
-        onClick={() => navigate("/role")}
-        className="bg-white text-black px-8 py-3 rounded-full font-semibold"
-      >
-        Explore
-      </button>
-
-    </div>
+      <section className="explore-bottom-actions">
+        <button
+          className="explore-bottom-btn explore-bottom-btn-primary"
+          onClick={() => navigate("/login")}
+        >
+          APPLY FOR JOBS
+        </button>
+        <button
+          className="explore-bottom-btn explore-bottom-btn-secondary"
+          onClick={() => {
+            window.location.href = "https://resume-portal-final.vercel.app/";
+          }}
+        >
+          CREATE RESUME
+        </button>
+      </section>
+    </main>
   );
 }
