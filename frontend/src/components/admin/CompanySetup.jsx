@@ -53,14 +53,14 @@ const CompanySetup = () => {
                 withCredentials: true
             });
             if (res.data.success) {
-                toast.success(res.data.message);
-                navigate("/admin/companies");
+                toast.success("Company updated");
+                setLoading(false);
+                navigate("/admin/companies", { replace: true });
             }
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.message);
-        } finally {
-            setLoading(false);
+            setLoading(false); // Also ensure loading is reset on error
         }
     }
 

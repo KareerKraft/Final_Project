@@ -9,6 +9,7 @@ import { COMPANY_API_END_POINT } from '@/utils/constant'
 import { toast } from 'sonner'
 import { useDispatch } from 'react-redux'
 import { setSingleCompany } from '@/redux/companySlice'
+import { Loader2 } from 'lucide-react'
 
 const CompanyCreate = () => {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ const CompanyCreate = () => {
         companyName: "",
         file: null
     });
+    const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
     const changeEventHandler = (e) => {
@@ -28,6 +30,7 @@ const CompanyCreate = () => {
     };
 
     const registerNewCompany = async () => {
+        setLoading(true);
         try {
             const formData = new FormData();
             formData.append("companyName", input.companyName);
@@ -49,12 +52,14 @@ const CompanyCreate = () => {
 
             if (res?.data?.success) {
                 dispatch(setSingleCompany(res.data.company));
-                toast.success(res.data.message);
-                const companyId = res?.data?.company?._id;
-                navigate(`/admin/companies/${companyId}`);
+                toast.success("Company created");
+                setLoading(false);
+                navigate("/admin/companies", { replace: true });
             }
         } catch (error) {
             console.log(error);
+            toast.error(error?.response?.data?.message || "Failed to create company");
+            setLoading(false);
         }
     };
 
@@ -85,7 +90,9 @@ const CompanyCreate = () => {
 
                 <div className='flex items-center gap-2 my-10'>
                     <Button variant="outline" onClick={() => navigate("/admin/companies")}>Cancel</Button>
-                    <Button onClick={registerNewCompany}>Continue</Button>
+                    <Button onClick={registerNewCompany} disabled={loading}>
+                        {loading ? <><Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait</> : "Continue"}
+                    </Button>
                 </div>
             </div>
         </div>
