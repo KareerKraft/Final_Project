@@ -1,27 +1,27 @@
 import React from 'react'
 import { Badge } from './ui/badge'
 
-const LatestJobCards = ({ job }) => {
+const LatestJobCards = ({ job, isActive = false }) => {
   return (
-    <div className='p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer'>
-      <div>
-        <h1 className='font-medium text-lg'>{job?.company?.name}</h1>
-        <p className='text-sm text-gray-500'>India</p>
+    <div className={`latest-job-card ${isActive ? 'is-active' : 'is-muted'}`}>
+      <div className='latest-job-card-header'>
+        <h1 className='latest-job-company'>{job?.company?.name}</h1>
+        <p className='latest-job-location'>{job?.location || 'India'}</p>
       </div>
 
       <div>
-        <h1 className='font-bold text-lg my-2'>{job?.title}</h1>
-        <p className='text-sm text-gray-600'>{job?.description}</p>
+        <h1 className='latest-job-title'>{job?.title}</h1>
+        <p className='latest-job-description'>{job?.description}</p>
       </div>
 
-      <div className='flex items-center gap-2 mt-4'>
-        <Badge className="text-[#000000] font-bold" variant="outline">
+      <div className='latest-job-badges'>
+        <Badge className={`${isActive ? 'bg-[#e8f8ec] border-[#67c97c]' : ''} text-[#000000] font-bold`} variant="outline">
           {job?.position} Positions
         </Badge>
-        <Badge className="text-[#000000] font-bold" variant="outline">
+        <Badge className={`${isActive ? 'bg-[#e8f8ec] border-[#67c97c]' : ''} text-[#000000] font-bold`} variant="outline">
           {job?.jobType}
         </Badge>
-        <Badge className="text-[#000000] font-bold" variant="outline">
+        <Badge className={`${isActive ? 'bg-[#e8f8ec] border-[#67c97c]' : ''} text-[#000000] font-bold`} variant="outline">
           {job?.salary} LPA
         </Badge>
       </div>

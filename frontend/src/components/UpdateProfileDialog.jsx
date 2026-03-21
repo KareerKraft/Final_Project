@@ -14,6 +14,7 @@ import SearchableMultiSelect from './SearchableMultiSelect'
 const UpdateProfileDialog = ({ open, setOpen }) => {
     const [loading, setLoading] = useState(false);
     const { user } = useSelector(store => store.auth);
+    const isRecruiter = user?.role === 'recruiter';
 
     const SKILLS = [
         'JavaScript','React','Node.js','Express','MongoDB','Python','Django','Java','C++','SQL','TypeScript','AWS','Docker','Kubernetes','Vue.js','Angular','Spring Boot','PHP','Ruby','Go','Rust','C#','.NET','GraphQL','REST API','Git','Linux','Windows','MacOS','Firebase','PostgreSQL','MySQL','Redis','Elasticsearch','Kubernetes','Jenkins','GitLab','GitHub','Bitbucket','JIRA','Figma','Bootstrap','Tailwind CSS','SASS','HTML5','CSS3','jQuery','Axios','Testing','Jest','Mocha','Cypress','REST','SOAP','OAuth','JWT','Microservices','API Design'
@@ -74,17 +75,19 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     const submitHandler = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append("fullname", input.fullname);
-        formData.append("email", input.email);
-        formData.append("phoneNumber", input.phoneNumber);
-        formData.append("bio", input.bio);
-        formData.append("skills", (input.skills || []).join(","));
-        formData.append("jobTitles", (input.jobTitles || []).join(","));
-        const preferredLocationsArray = [input.preferredLocation1, input.preferredLocation2, input.preferredLocation3].filter(Boolean);
-        formData.append("preferredLocations", preferredLocationsArray.join(","));
-        formData.append("workPreference", input.workPreference);
-        if (input.file) {
-            formData.append("file", input.file);
+        if (!isRecruiter) {
+            formData.append("fullname", input.fullname);
+            formData.append("email", input.email);
+            formData.append("phoneNumber", input.phoneNumber);
+            formData.append("bio", input.bio);
+            formData.append("skills", (input.skills || []).join(","));
+            formData.append("jobTitles", (input.jobTitles || []).join(","));
+            const preferredLocationsArray = [input.preferredLocation1, input.preferredLocation2, input.preferredLocation3].filter(Boolean);
+            formData.append("preferredLocations", preferredLocationsArray.join(","));
+            formData.append("workPreference", input.workPreference);
+            if (input.file) {
+                formData.append("file", input.file);
+            }
         }
         if (input.profilePhoto) {
             formData.append("profilePhoto", input.profilePhoto);
@@ -126,9 +129,9 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
 return (
     <div>
         <Dialog open={open}>
-            <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto bg-white" onInteractOutside={() => setOpen(false)}>
+            <DialogContent className={`${isRecruiter ? 'sm:max-w-md' : 'sm:max-w-2xl'} max-h-[90vh] overflow-y-auto bg-white`} onInteractOutside={() => setOpen(false)}>
                 <DialogHeader className="bg-black -mx-6 -mt-6 px-6 pt-6 pb-4 rounded-t-lg">
-                    <DialogTitle className="text-xl md:text-2xl text-white font-bold">Update Your Profile</DialogTitle>
+                    <DialogTitle className="text-xl md:text-2xl text-white font-bold">{isRecruiter ? 'Update Profile Photo' : 'Update Your Profile'}</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={submitHandler}>
                     <div className='grid gap-6 py-6 px-2 md:px-4'>
@@ -153,8 +156,13 @@ return (
                                     />
                                 </label>
                             </div>
+                            {isRecruiter && (
+                                <p className="text-sm text-gray-600">Upload a recruiter profile picture here. No other profile fields are required.</p>
+                            )}
                         </div>
 
+                        {!isRecruiter && (
+                        <>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                             <div className="rounded-lg bg-gray-50 p-4 shadow-sm border border-green-200">
                                 <Label htmlFor="name" className="text-sm md:text-base font-semibold text-gray-900 block mb-2">Full Name</Label>
@@ -302,6 +310,8 @@ return (
                                 className="text-sm md:text-base border-green-300 focus:border-green-500 focus:ring-green-500"
                             />
                         </div>
+                        </>
+                        )}
                     </div>
                     <DialogFooter className="bg-black -mx-6 -mb-6 px-6 py-4 rounded-b-lg">
                         {

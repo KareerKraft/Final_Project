@@ -7,6 +7,7 @@ import Footer from './shared/Footer'
 import useGetAllJobs from '@/hooks/useGetAllJobs'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import './latest-jobs.css'
 
 const Home = () => {
   useGetAllJobs();
@@ -20,7 +21,7 @@ const Home = () => {
     }
   }, [user]);
   return (
-    <div>
+    <div className="job-portal-home">
       <Navbar />
       <HeroSection />
       <CategoryCarousel />

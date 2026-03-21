@@ -19,18 +19,25 @@ const HeroSection = () => {
         <div className='text-center'>
             <div className='flex flex-col gap-5 my-10'>
                 <h1 className='text-5xl font-bold'>Search, Apply & <br /> Get Your <span className='text-[#469428]'>Dream Jobs</span></h1>
-                <div className='flex w-[40%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto'>
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        searchJobHandler();
+                    }}
+                    className='flex w-[40%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto'
+                >
                     <input
                         type="text"
                         placeholder='Find your dream jobs'
+                        value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         className='outline-none border-none w-full'
 
                     />
-                    <Button onClick={searchJobHandler} className="rounded-r-full bg-[#499428] hover:bg-[#66BB6A]">
+                    <Button type="submit" className="rounded-r-full bg-[#499428] hover:bg-[#66BB6A]">
                         <Search className='h-5 w-5' />
                     </Button>
-                </div>
+                </form>
             </div>
         </div>
     )

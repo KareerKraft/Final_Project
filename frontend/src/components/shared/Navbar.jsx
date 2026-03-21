@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link, useNavigate } from "react-router-dom";
 import { User2, LogOut } from "lucide-react";
 import { Button } from '../ui/button'
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover'
 import { useDispatch, useSelector } from 'react-redux';
 import { USER_API_END_POINT } from '@/utils/constant'
@@ -14,6 +14,8 @@ const Navbar = () => {
     const { user } = useSelector(store => store.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const profilePhoto = user?.profile?.profilePhoto;
+    const firstName = user?.fullname?.trim()?.split(" ")[0] || "User";
 
     const logoutHandler = async () => {
         try {
@@ -61,29 +63,40 @@ const Navbar = () => {
                         ) : (
                             <Popover>
                                 <PopoverTrigger asChild>
-                                    <Avatar className="cursor-pointer">
+                                    <Avatar className="h-10 w-10 cursor-pointer border border-gray-200">
                                         <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
+                                        <AvatarFallback>{user?.fullname?.charAt(0)?.toUpperCase()}</AvatarFallback>
                                     </Avatar>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-88 z-10">
-                                    <div className=''>
-                                        <div className='flex gap-4 space-y-2'>
-                                            <Avatar className="cursor-pointer">
+                                <PopoverContent align="end" sideOffset={10} className="z-[70] w-64 border border-gray-200 bg-white p-4 shadow-xl">
+                                    <div className='space-y-4'>
+                                        <div className='flex items-center gap-3'>
+                                            <Avatar className="h-12 w-12 border border-gray-200">
                                                 <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
+                                                <AvatarFallback>{user?.fullname?.charAt(0)?.toUpperCase()}</AvatarFallback>
                                             </Avatar>
+                                            <div className='min-w-0'>
+                                                <p className='truncate font-semibold text-gray-900'>{user?.role === 'recruiter' ? firstName : user?.fullname}</p>
+                                                <p className='truncate text-sm text-gray-500'>{user?.email}</p>
+                                            </div>
                                         </div>
-                                        <div className='flex flex-col text-gray-600'>
-                                            {
-                                                user && user.role === 'student' && (
-                                                    <div className='flex w-fit items-center gap-2 cursor-pointer'>
-                                                        <User2 />
-                                                        <Button variant="link"><Link to="/profile">View Profile</Link></Button>
-                                                    </div>
-                                                )
-                                            }
-                                            <div className='flex w-fit items-center gap-2 cursor-pointer'>
+                                        <div className='flex flex-col gap-1 text-gray-600'>
+                                            {user?.role !== 'recruiter' && (
+                                                <div className='flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-green-100'>
+                                                    <User2 className='h-4 w-4' />
+                                                    <Button asChild variant="link" className="h-auto p-0 text-gray-700 no-underline hover:no-underline">
+                                                        <Link to="/profile">View Profile</Link>
+                                                    </Button>
+                                                </div>
+                                            )}
+                                            {user?.role === 'recruiter' && (
+                                                <div className='rounded-md px-2 py-1 text-xs text-gray-500'>
+                                                    {profilePhoto ? 'Profile photo is available.' : `${firstName} is logged in.`}
+                                                </div>
+                                            )}
+                                            <div className='flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-gray-100'>
                                                 <LogOut />
-                                                <Button onClick={logoutHandler} variant="link">Logout</Button>
+                                                <Button onClick={logoutHandler} variant="link" className="h-auto p-0 text-gray-700 no-underline hover:no-underline">Logout</Button>
                                             </div>
                                         </div>
                                     </div>
