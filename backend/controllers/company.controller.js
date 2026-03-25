@@ -5,7 +5,7 @@ import cloudinary from "../utils/cloudinary.js";
 export const registerCompany = async (req, res) => {
     try {
         const { companyName } = req.body;
-        const file = req.file;
+        const file = req.files?.file?.[0];
 
         if (!companyName) {
             return res.status(400).json({
@@ -45,6 +45,10 @@ export const registerCompany = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message: "Failed to register company.",
+            success: false
+        });
     }
 };
 
@@ -64,6 +68,10 @@ export const getCompany = async (req, res) => {
         })
     } catch(error){
         console.log(error);
+        return res.status(500).json({
+            message:"Failed to fetch companies.",
+            success:false
+        });
     }
 }
 export const getCompanyById = async(req, res) => {
@@ -82,18 +90,24 @@ export const getCompanyById = async(req, res) => {
         })
     } catch(error){
         console.log(error);
+        return res.status(500).json({
+            message:"Failed to fetch company.",
+            success:false
+        });
     }
 }
 export const updateCompany = async(req, res) => {
     try{
-        console.log("FILE:", req.file);
         const {name, description, website, location} = req.body;
-        const file = req.file;
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-        const logo = cloudResponse.secure_url;
-
+        const file = req.files?.file?.[0];
         const updatedData = {name, description, website, location};
+
+        if (file) {
+            const fileUri = getDataUri(file);
+            const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+            updatedData.logo = cloudResponse.secure_url;
+        }
+
         const company = await Company.findByIdAndUpdate(req.params.id, updatedData, {new: true});
 
         if(!company){
@@ -104,9 +118,14 @@ export const updateCompany = async(req, res) => {
         }
         return res.status(200).json({
             message:"Company Information updated.",
+            company,
             success:true
         })
     } catch(error){
         console.log(error);
+        return res.status(500).json({
+            message:"Failed to update company information.",
+            success:false
+        });
     }
 }
