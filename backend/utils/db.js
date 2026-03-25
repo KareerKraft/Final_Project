@@ -1,13 +1,26 @@
-//connectdatabase
+// connectdatabase
 import mongoose from "mongoose";
 
-const connectDB =async () => {
-    try{
-        await mongoose.connect(process.env.MONGO_URI);
-        console.log('mongodb connected sucessfully');    
-    }
-    catch(error){
-        console.log(error);
-    }
-}
+mongoose.set("bufferCommands", false);
+
+const connectDB = async () => {
+  const mongoUri = process.env.MONGO_URI;
+
+  if (!mongoUri) {
+    throw new Error("MONGO_URI is missing in backend/.env");
+  }
+
+  try {
+    await mongoose.connect(mongoUri, {
+      serverSelectionTimeoutMS: 10000,
+    });
+    console.log("mongodb connected successfully");
+  } catch (error) {
+    console.error("MongoDB connection failed:", error.message);
+    throw error;
+  }
+};
+
+export const isDatabaseConnected = () => mongoose.connection.readyState === 1;
+
 export default connectDB;

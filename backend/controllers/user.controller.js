@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 import { OAuth2Client } from "google-auth-library";
+import { isDatabaseConnected } from "../utils/db.js";
 
 export const register = async (req, res) => {
   try {
@@ -222,6 +223,13 @@ export const updateProfile = async (req, res) => {
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 export const googleLogin = async (req, res) => {
   try {
+    if (!isDatabaseConnected()) {
+      return res.status(503).json({
+        message: "Database unavailable. Check MongoDB connection and try again.",
+        success: false
+      });
+    }
+
     const { token, role } = req.body;
 
     if (!token || !role) {

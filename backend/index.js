@@ -44,7 +44,16 @@ app.use("/api/v1/application", applicationRoute);
 // "http://localhost:8000/api/v1/user/login"
 // "http://localhost:8000/api/v1/user/profile/update"
 
-app.listen(PORT,()=>{
-    connectDB();
-    console.log(`Server running at port ${PORT}`);
-})
+const startServer = async () => {
+    try {
+        await connectDB();
+        app.listen(PORT, () => {
+            console.log(`Server running at port ${PORT}`);
+        });
+    } catch (error) {
+        console.error("Server startup aborted because database connection failed.");
+        process.exit(1);
+    }
+};
+
+startServer();
