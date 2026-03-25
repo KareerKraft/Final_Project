@@ -17,17 +17,25 @@ const Navbar = () => {
     const profilePhoto = user?.profile?.profilePhoto;
     const firstName = user?.fullname?.trim()?.split(" ")[0] || "User";
 
+    const completeLocalLogout = (message) => {
+        dispatch(setUser(null));
+        navigate("/explore", { replace: true });
+        toast.success(message);
+    };
+
     const logoutHandler = async () => {
         try {
             const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
-            if (res.data.success) {
-                dispatch(setUser(null));
-                navigate("/explore");
-                toast.success(res.data.message);
+            if (res?.data?.success) {
+                completeLocalLogout(res.data.message);
             }
         } catch (error) {
             console.log(error);
-            toast.error(error.response.data.message);
+            if (!error?.response) {
+                completeLocalLogout("Logged out locally.");
+                return;
+            }
+            toast.error(error?.response?.data?.message || "Logout failed");
         }
     }
     return (
