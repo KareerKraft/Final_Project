@@ -6,6 +6,19 @@ import cloudinary from "../utils/cloudinary.js";
 import { OAuth2Client } from "google-auth-library";
 import { isDatabaseConnected } from "../utils/db.js";
 
+const getCookieOptions = (req, maxAge = 1 * 24 * 60 * 60 * 1000) => {
+  const requestOrigin = req.headers.origin || "";
+  const isLocalRequest = /localhost|127\.0\.0\.1/i.test(requestOrigin);
+
+  return {
+    maxAge,
+    httpOnly: true,
+    sameSite: isLocalRequest ? "lax" : "none",
+    secure: !isLocalRequest,
+    path: "/"
+  };
+};
+
 export const register = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, password, role } = req.body;
@@ -101,7 +114,7 @@ export const login = async (req, res) => {
       profile: user.profile
     }
 
-    return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'strict'}).json({
+    return res.status(200).cookie("token", token, getCookieOptions(req)).json({
       message: `Welcome back ${user.fullname}`,
       user,
       success: true
@@ -116,13 +129,7 @@ export const login = async (req, res) => {
 }
 export const logout = async (req, res) => {
   try {
-    return res.status(200).cookie("token", "", {
-      maxAge: 0,
-      httpOnly: true,
-      sameSite: "lax",
-      secure: false,
-      path: "/"
-    }).json({
+    return res.status(200).cookie("token", "", getCookieOptions(req, 0)).json({
       message: "Logged out successfully.",
       success: true
     })
@@ -296,12 +303,7 @@ export const googleLogin = async (req, res) => {
 
     return res
       .status(200)
-      .cookie("token", jwtToken, {
-        maxAge: 1 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        sameSite: "strict",
-        secure: false
-      })
+      .cookie("token", jwtToken, getCookieOptions(req))
       .json({
         message: `Welcome ${safeUser.fullname}`,
         user: safeUser,

@@ -8,7 +8,7 @@ import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { useDispatch } from 'react-redux';
 import { setAllJobs } from '@/redux/jobSlice';
-import axios from 'axios';
+import axios from '@/utils/axios';
 import { APPLICATION_API_END_POINT, JOB_API_END_POINT } from '@/utils/constant';
 import { toast } from 'sonner';
 

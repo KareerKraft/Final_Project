@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { USER_API_END_POINT } from "@/utils/constant";
-import axios from "axios";
+import axios from "../../utils/axios";
 import { toast } from "sonner";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";

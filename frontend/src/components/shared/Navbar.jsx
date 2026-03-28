@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import axios from '@/utils/axios'
 import { Link, useNavigate } from "react-router-dom";
 import { User2, LogOut } from "lucide-react";
 import { Button } from '../ui/button'

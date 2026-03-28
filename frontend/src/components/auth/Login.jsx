@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import axios from "axios";
+import axios from "@/utils/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setUser } from '@/redux/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Loader2, Lock, Mail } from 'lucide-react';
 import { GoogleLogin } from "@react-oauth/google";
-
-const USER_API_END_POINT = `${import.meta.env.VITE_API_URL}/api/v1/user`;
+import { USER_API_END_POINT } from '@/utils/constant';
 
 const roleOptions = [
   { label: "Student", value: "student" },
