@@ -2,13 +2,18 @@ import { setAllAppliedJobs } from "@/redux/jobSlice";
 import { APPLICATION_API_END_POINT } from "@/utils/constant";
 import axios from "axios"
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 const useGetAppliedJobs = () => {
     const dispatch = useDispatch();
+    const { user } = useSelector(store => store.auth);
 
     useEffect(()=>{
         const fetchAppliedJobs = async () => {
+            if(!user){
+                dispatch(setAllAppliedJobs([]));
+                return;
+            }
             try {
                 const res = await axios.get(`${APPLICATION_API_END_POINT}/get`, {withCredentials:true});
                 console.log(res.data);
@@ -20,6 +25,6 @@ const useGetAppliedJobs = () => {
             }
         }
         fetchAppliedJobs();
-    },[])
+    },[dispatch, user])
 };
 export default useGetAppliedJobs;

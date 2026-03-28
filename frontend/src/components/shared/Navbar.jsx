@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { USER_API_END_POINT } from '@/utils/constant'
 import { toast } from 'sonner';
 import { setUser } from "@/redux/authSlice";
+import { persistor } from '@/redux/store';
 
 const Navbar = () => {
     const { user } = useSelector(store => store.auth);
@@ -19,6 +20,7 @@ const Navbar = () => {
 
     const completeLocalLogout = (message) => {
         dispatch(setUser(null));
+        persistor.purge();
         navigate("/explore", { replace: true });
         toast.success(message);
     };
@@ -102,9 +104,12 @@ const Navbar = () => {
                                                     {profilePhoto ? 'Profile photo is available.' : `${firstName} is logged in.`}
                                                 </div>
                                             )}
-                                            <div className='flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-gray-100'>
+                                            <div
+                                                onClick={logoutHandler}
+                                                className='flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 hover:bg-gray-100'
+                                            >
                                                 <LogOut />
-                                                <Button onClick={logoutHandler} variant="link" className="h-auto p-0 text-gray-700 no-underline hover:no-underline">Logout</Button>
+                                                <Button type="button" variant="link" className="h-auto p-0 text-gray-700 no-underline hover:no-underline">Logout</Button>
                                             </div>
                                         </div>
                                     </div>

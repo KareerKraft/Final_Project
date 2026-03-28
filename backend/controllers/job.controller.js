@@ -93,7 +93,7 @@ export const getJobById = async (req, res) => {
 }
 export const getAdminJobs = async (req, res) => {
     try {
-        const jobs = await Job.find({})
+        const jobs = await Job.find({ created_by: req.id })
             .populate({ path: 'company' })
             .sort({ createdAt: -1 });
         return res.status(200).json({

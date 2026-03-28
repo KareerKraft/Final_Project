@@ -4,14 +4,11 @@ import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useSelector } from 'react-redux'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import axios from 'axios'
 import { JOB_API_END_POINT } from '@/utils/constant'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
 import { Loader2 } from 'lucide-react'
-
-const companyArray = [];
 
 const PostJob = () => {
     const [input, setInput] = useState({
@@ -25,6 +22,7 @@ const PostJob = () => {
         position: 0,
         companyId: ""
     });
+    const [selectedCompanyId, setSelectedCompanyId] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -35,14 +33,10 @@ const PostJob = () => {
 
     
 
-    const selectChangeHandler = (value) => {
-        const selectedCompany = companies.find(
-            (company) => company.name.toLowerCase() === value
-        );
-
-        if (selectedCompany) {
-            setInput({ ...input, companyId: selectedCompany._id });
-        }
+    const selectChangeHandler = (e) => {
+        const companyId = e.target.value;
+        setSelectedCompanyId(companyId);
+        setInput({ ...input, companyId });
     };
 
     const submitHandler = async (e) => {
@@ -70,9 +64,9 @@ const PostJob = () => {
     return (
         <div>
             <Navbar />
-            <div className='flex items-center justify-center w-screen my-5'>
-                <form onSubmit={submitHandler} className='p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md'>
-                    <div className='grid grid-cols-2 gap-2'>
+            <div className='flex items-center justify-center px-4 py-5'>
+                <form onSubmit={submitHandler} className='w-full max-w-4xl rounded-md border border-gray-200 p-8 shadow-lg'>
+                    <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                         <div>
                             <Label>Title</Label>
                             <Input
@@ -144,7 +138,7 @@ const PostJob = () => {
                             />
                         </div>
                         <div>
-                            <Label>No of Postion</Label>
+                            <Label>No of Position</Label>
                             <Input 
                                 type="number"
                                 name="position"
@@ -153,27 +147,24 @@ const PostJob = () => {
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
-                        {
-                            companies.length > 0 && (
-                                <Select onValueChange={selectChangeHandler}>
-                                    <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="Select a Company"/>
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectGroup>
-                                            {
-                                                companies.map((company) => {
-                                                    return (
-                                                        <SelectItem value={company?.name?.toLowerCase()}>{company.name}</SelectItem>
-                                                    )
-                                                })
-                                            }
-
-                                        </SelectGroup>
-                                    </SelectContent>
-                                </Select>
-                            )
-                        }
+                        {companies.length > 0 && (
+                            <div className='md:col-span-2'>
+                                <Label>Company</Label>
+                                <select
+                                    name="companyId"
+                                    value={selectedCompanyId}
+                                    onChange={selectChangeHandler}
+                                    className="my-1 h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-sm outline-none focus:border-[#66BB6A] focus:ring-2 focus:ring-[#66BB6A]/20"
+                                >
+                                    <option value="">Select a Company</option>
+                                    {companies.map((company) => (
+                                        <option key={company._id} value={company._id}>
+                                            {company.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
                     </div>
                     {
                         loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="w-full my-4">Post New Job</Button>

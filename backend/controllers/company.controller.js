@@ -55,7 +55,7 @@ export const registerCompany = async (req, res) => {
 
 export const getCompany = async (req, res) => {
     try{
-        const companies = await Company.find({}).sort({ createdAt: -1 });
+        const companies = await Company.find({ userId: req.id }).sort({ createdAt: -1 });
         return res.status(200).json({
             companies,
             success:true
@@ -71,7 +71,7 @@ export const getCompany = async (req, res) => {
 export const getCompanyById = async(req, res) => {
     try{
         const companyId = req.params.id;
-        const company = await Company.findById(companyId);
+        const company = await Company.findOne({ _id: companyId, userId: req.id });
         if(!company){
             return res.status(404).json({
                 message:"Company not found.",
@@ -102,7 +102,11 @@ export const updateCompany = async(req, res) => {
             updatedData.logo = cloudResponse.secure_url;
         }
 
-        const company = await Company.findByIdAndUpdate(req.params.id, updatedData, {new: true});
+        const company = await Company.findOneAndUpdate(
+            { _id: req.params.id, userId: req.id },
+            updatedData,
+            { new: true }
+        );
 
         if(!company){
             return res.status(404).json({
