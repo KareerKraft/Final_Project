@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
-import "../styles/intro.css";
+import "../styles/Intro.css";
 
 function Intro() {
   const navigate = useNavigate();
