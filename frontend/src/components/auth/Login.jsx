@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { Loader2, Lock, Mail } from 'lucide-react';
 import { GoogleLogin } from "@react-oauth/google";
 
-const USER_API_END_POINT = "http://localhost:8000/api/v1/user";
+const USER_API_END_POINT = `${import.meta.env.VITE_API_URL}/api/v1/user`;
 
 const roleOptions = [
   { label: "Student", value: "student" },
