@@ -6,15 +6,16 @@ export const registerCompany = async (req, res) => {
     try {
         const { companyName } = req.body;
         const file = req.files?.file?.[0];
+        const normalizedCompanyName = companyName?.trim();
 
-        if (!companyName) {
+        if (!normalizedCompanyName) {
             return res.status(400).json({
                 message: "Company name is required.",
                 success: false
             });
         }
 
-        let company = await Company.findOne({ name: companyName });
+        let company = await Company.findOne({ name: normalizedCompanyName });
         if (company) {
             return res.status(400).json({
                 message: "You can't register same company.",
@@ -32,7 +33,7 @@ export const registerCompany = async (req, res) => {
         }
 
         company = await Company.create({
-            name: companyName,
+            name: normalizedCompanyName,
             userId: req.id,
             logo: logoUrl
         });
@@ -54,15 +55,8 @@ export const registerCompany = async (req, res) => {
 
 export const getCompany = async (req, res) => {
     try{
-        const userId = req.id;
-        const companies = await Company.find({userId});
-        if(!companies){
-            return res.status(404).json({
-                message:"Companies not found.",
-                success:false
-            });
-        }
-         return res.status(200).json({
+        const companies = await Company.find({}).sort({ createdAt: -1 });
+        return res.status(200).json({
             companies,
             success:true
         })
