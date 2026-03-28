@@ -68,6 +68,18 @@ export default function Explore() {
         >
           CREATE RESUME
         </button>
+        <button
+          className="explore-bottom-btn explore-bottom-btn-outline"
+          onClick={() => navigate("/placement-guide")}
+        >
+          PLACEMENT PREPARATION GUIDE
+        </button>
+        <button
+          className="explore-bottom-btn explore-bottom-btn-dark"
+          onClick={() => navigate("/hackathons")}
+        >
+          HACKATHONS
+        </button>
       </section>
     </main>
   );

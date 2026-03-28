@@ -19,6 +19,8 @@ import Intro from "./landing/pages/Intro";
 import Explore from "./landing/pages/Explore";
 import AboutUs from "./landing/pages/AboutUs";
 import Help from "./landing/pages/Help";
+import PlacementGuide from "./landing/pages/PlacementGuide";
+import Hackathons from "./landing/pages/Hackathons";
 import RoleSelect from "./pages/RoleSelect";
 import LandingLayout from "./landing/LandingLayout";  
 
@@ -47,6 +49,22 @@ const appRouter = createBrowserRouter([
   {
     path: '/help',
     element: <Help />
+  },
+  {
+    path: '/placement-guide',
+    element: (
+      <LandingLayout>
+        <PlacementGuide />
+      </LandingLayout>
+    )
+  },
+  {
+    path: '/hackathons',
+    element: (
+      <LandingLayout>
+        <Hackathons />
+      </LandingLayout>
+    )
   },
   {
     path: '/role',
