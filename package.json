@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "dev": "concurrently \"npm run server\" \"npm run client\"",
-  "server": "cd backend && npm run dev",
-  "client": "cd frontend && npm run dev"
-},
-
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm run dev"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KareerKraft/Job-Portal.git"
@@ -20,7 +19,8 @@
   },
   "homepage": "https://github.com/KareerKraft/Job-Portal#readme",
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.4"
   },
   "dependencies": {
     "ansi-regex": "^5.0.1",
