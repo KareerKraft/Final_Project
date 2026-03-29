@@ -20,6 +20,7 @@ import Explore from "./landing/pages/Explore";
 import AboutUs from "./landing/pages/AboutUs";
 import Help from "./landing/pages/Help";
 import PlacementGuide from "./landing/pages/PlacementGuide";
+import PlacementGuideDetail from "./landing/pages/PlacementGuideDetail";
 import Hackathons from "./landing/pages/Hackathons";
 import RoleSelect from "./pages/RoleSelect";
 import LandingLayout from "./landing/LandingLayout";  
@@ -55,6 +56,14 @@ const appRouter = createBrowserRouter([
     element: (
       <LandingLayout>
         <PlacementGuide />
+      </LandingLayout>
+    )
+  },
+  {
+    path: '/placement-guide/:slug',
+    element: (
+      <LandingLayout>
+        <PlacementGuideDetail />
       </LandingLayout>
     )
   },
