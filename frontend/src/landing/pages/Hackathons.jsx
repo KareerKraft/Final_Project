@@ -42,9 +42,7 @@ export default function Hackathons() {
         <span className="extras-tag extras-tag-hackathons">Hackathon Zone</span>
         <h1 className="extras-title">Let&apos;s Hack the Hackathons!</h1>
         <p className="extras-description">
-          Turn a weekend of coding into a career-defining experience. Learn new
-          skills, solve real challenges, and create a standout project for your
-          resume.
+          Dive into the ultimate coding adventure! Unleash your creativity, collaborate with brilliant minds, and turn wild ideas into reality. Whether you're a solo innovator or a team powerhouse, hackathons are your launchpad to tech stardom.
         </p>
         <div className="extras-cta-row">
           <button
@@ -61,6 +59,23 @@ export default function Hackathons() {
           >
             Applied Hackathons
           </button>
+        </div>
+      </section>
+
+      <section className="extras-image-gallery">
+        <div className="extras-image-card">
+          <img src="/hack2.jpeg" alt="Hackathon Team Collaboration" className="extras-image" />
+          <div className="extras-image-overlay">
+            <h3>Team Synergy Unleashed</h3>
+            <p>Watch ideas collide and transform into groundbreaking solutions!</p>
+          </div>
+        </div>
+        <div className="extras-image-card">
+          <img src="/hack3.jpeg" alt="Hackathon Winning Moment" className="extras-image" />
+          <div className="extras-image-overlay">
+            <h3>Victory & Glory Await</h3>
+            <p>From late-night coding to standing ovations—your moment to shine!</p>
+          </div>
         </div>
       </section>
 
