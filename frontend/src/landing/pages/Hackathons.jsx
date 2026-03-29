@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import "../styles/ExploreExtras.css";
@@ -18,11 +19,36 @@ const hackathonSteps = [
 ];
 
 const prepTips = [
-  "Clarify your motivation and build scope",
-  "Practice pitching your idea in <2 min",
-  "Learn tools (Git, Figma, Postman, etc.)",
-  "Prepare a 1-page project plan",
-  "Get familiar with APIs, templates, and libraries",
+  {
+    title: "Understand Problem Statements",
+    explanation: "Choose problems that match your skills and passion. Look for themes like sustainability, AI, or social impact. Read carefully—focus on feasibility within 24-48 hours."
+  },
+  {
+    title: "Learn Essential Tools",
+    tools: [
+      { name: "Git", desc: "Version control for team collaboration", help: "Track changes and merge code seamlessly" },
+      { name: "Figma", desc: "UI/UX design tool", help: "Create wireframes and prototypes quickly" },
+      { name: "Postman", desc: "API testing tool", help: "Test and debug API integrations" },
+      { name: "VS Code", desc: "Code editor", help: "Write, debug, and manage code efficiently" },
+    ],
+    aiTools: "Use GitHub Copilot for code suggestions, ChatGPT for brainstorming, and Canva AI for quick designs to save time."
+  },
+  {
+    title: "Prepare a 1-page Project Plan",
+    explanation: "Outline your idea, tech stack, and timeline. Include user stories and success metrics to stay focused."
+  },
+  {
+    title: "Practice Pitching",
+    explanation: "Prepare a 2-minute pitch. Focus on problem, solution, and impact. Practice with friends for confidence."
+  },
+];
+
+const hackathonConstraints = [
+  "Time constraint: 24-48 hours to build a working product",
+  "Limited resources: Work with free tools and APIs",
+  "Team coordination: Managing different time zones and skills",
+  "Sleep deprivation: Balancing energy and productivity",
+  "Technical challenges: Debugging under pressure",
 ];
 
 const hackathonBenefits = [
@@ -33,8 +59,31 @@ const hackathonBenefits = [
   "Develop resilience through rapid iteration",
 ];
 
+const hackathonResources = [
+  {
+    name: "HackerEarth",
+    url: "https://corporate.hackathon.com/articles/the-ultimate-guide-to-choosing-the-best-hackathon-website-2025-edition?utm_source=chatgpt.com",
+    description: "Ultimate guide to choosing the best hackathon platform"
+  },
+  {
+    name: "HackerRank",
+    url: "https://www.hackerrank.com/?utm_source=chatgpt.com",
+    description: "Practice coding and improve your skills with challenges"
+  },
+];
+
 export default function Hackathons() {
   const navigate = useNavigate();
+  const [expandedPrep, setExpandedPrep] = useState({});
+  const [expandedTools, setExpandedTools] = useState(false);
+
+  const togglePrep = (index) => {
+    setExpandedPrep(prev => ({ ...prev, [index]: !prev[index] }));
+  };
+
+  const toggleTools = () => {
+    setExpandedTools(!expandedTools);
+  };
 
   return (
     <main className="extras-page extras-page-hackathons">
@@ -94,9 +143,52 @@ export default function Hackathons() {
 
         <div className="extras-section-card">
           <h2>How to Prepare</h2>
+          <div className="extras-accordion">
+            {prepTips.map((tip, idx) => (
+              <div key={tip.title || tip}>
+                {typeof tip === 'string' ? (
+                  <p>{tip}</p>
+                ) : (
+                  <>
+                    <div
+                      className={`extras-accordion-item ${tip.title === "Learn Essential Tools" ? (expandedTools ? 'active' : '') : (expandedPrep[idx] ? 'active' : '')}`}
+                      onClick={() => tip.title === "Learn Essential Tools" ? toggleTools() : togglePrep(idx)}
+                    >
+                      <span className="extras-accordion-title">{tip.title}</span>
+                      <span className="extras-accordion-arrow">→</span>
+                    </div>
+                    {tip.title === "Learn Essential Tools" ? (
+                      expandedTools && (
+                        <div className="extras-accordion-content">
+                          <ul className="extras-tools-list">
+                            {tip.tools.map((tool) => (
+                              <li key={tool.name}>
+                                <strong>{tool.name}</strong> ({tool.desc}) - {tool.help}
+                              </li>
+                            ))}
+                          </ul>
+                          <p className="extras-ai-note"><em>AI Tools Tip:</em> {tip.aiTools}</p>
+                        </div>
+                      )
+                    ) : (
+                      expandedPrep[idx] && (
+                        <div className="extras-accordion-content">
+                          <p>{tip.explanation}</p>
+                        </div>
+                      )
+                    )}
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="extras-section-card">
+          <h2>Hackathon Constraints & Challenges</h2>
           <ul className="extras-info-list">
-            {prepTips.map((tip) => (
-              <li key={tip}>{tip}</li>
+            {hackathonConstraints.map((constraint) => (
+              <li key={constraint}>{constraint}</li>
             ))}
           </ul>
         </div>
@@ -124,6 +216,23 @@ export default function Hackathons() {
               </button>
             ))}
           </div>
+        </div>
+
+        <div className="extras-section-card">
+          <h2>Hackathon Guide & References</h2>
+          <p style={{ color: '#b7ffce', marginBottom: '1rem' }}>Learn from industry experts and improve your skills with these curated resources:</p>
+          <ul className="extras-resources-list">
+            {hackathonResources.map((resource) => (
+              <li 
+                key={resource.name} 
+                className="extras-resource-item"
+                onClick={() => window.open(resource.url, '_blank')}
+              >
+                <strong className="extras-resource-title">{resource.name}</strong>
+                <p>{resource.description}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </main>
