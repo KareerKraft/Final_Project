@@ -11,17 +11,12 @@ function Intro() {
 
     const tl = gsap.timeline();
 
-    tl.to("#hat", {
-      rotation: 15,
-      duration: 0.5,
-      ease: "power1.inOut",
-    })
-      .add(() => typeText("brand-text", "KAREER KRAFT"))
+    tl.add(() => typeWords("brand-text", ["KAREER", "KRAFT"]))
       .to({}, { duration: 1.5 })
       .to(
         "#logo-group",
         {
-          x: "-25vw",
+          x: "-15vw",
           duration: 1.2,
           ease: "power2.inOut",
         },
@@ -49,22 +44,47 @@ function Intro() {
     return () => clearTimeout(timer);
   }, [navigate]);
 
-  function typeText(elementId, text) {
+  function typeText(elementId, text, startDelay = 0) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+
+    const word = document.createElement("span");
+    word.style.whiteSpace = "pre";
+    el.appendChild(word);
+
+    const letters = text.split("");
+    letters.forEach((char, i) => {
+      const span = document.createElement("span");
+      span.textContent = char === " " ? "\u00A0" : char;
+      span.style.opacity = "0";
+      word.appendChild(span);
+
+      gsap.to(span, {
+        opacity: 1,
+        delay: startDelay + i * 0.08,
+      });
+    });
+
+    return startDelay + letters.length * 0.08;
+  }
+
+  function typeWords(elementId, words) {
     const el = document.getElementById(elementId);
     if (!el) return;
 
     el.innerHTML = "";
+    let delay = 0;
 
-    text.split("").forEach((char, i) => {
-      const span = document.createElement("span");
-      span.textContent = char === " " ? "\u00A0" : char;
-      span.style.opacity = "0";
-      el.appendChild(span);
+    words.forEach((w, index) => {
+      if (index > 0) {
+        const space = document.createElement("span");
+        space.textContent = " ";
+        space.style.opacity = "1";
+        el.appendChild(space);
+        delay += 0.2;
+      }
 
-      gsap.to(span, {
-        opacity: 1,
-        delay: i * 0.08,
-      });
+      delay = typeText(elementId, w, delay);
     });
   }
 
@@ -74,10 +94,7 @@ function Intro() {
       onClick={() => navigate("/explore")} // ⚡ click to skip
     >
       <div id="logo-group">
-        <div className="logo-stack">
-          <img src="/hat.png" id="hat" alt="hat" />
-          <img src="/KK_logo.png" id="kk-logo" alt="logo" />
-        </div>
+        <img src="/logo.png" id="kk-logo" alt="logo" />
         <div id="brand-text" className="bold-text"></div>
       </div>
 
@@ -85,16 +102,7 @@ function Intro() {
         <div id="slogan-text" className="bold-text"></div>
       </div>
 
-      {/* Optional buttons (can keep or remove) */}
-      <div className="intro-buttons">
-        <button onClick={() => navigate("/login")}>Login</button>
-        <button onClick={() => navigate("/jobs")}>
-          Apply for Jobs
-        </button>
-        <button onClick={() => navigate("/login")}>
-          Create Resume
-        </button>
-      </div>
+      {/* Optional buttons (removed) */}
     </div>
   );
 }

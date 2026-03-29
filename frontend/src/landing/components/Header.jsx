@@ -9,7 +9,7 @@ function Header() {
           <img src="/logo.png" alt="KK Logo" className="kk-logo-img" />
         </div>
         <nav className="nav-menu">
-          <Link to="/" className="nav-link">HOME</Link>
+          <Link to="/explore" className="nav-link">HOME</Link>
           <Link to="/AboutUs" className="nav-link">ABOUT US</Link>
           <Link to="/Help" className="nav-link">HELP</Link>
         </nav>

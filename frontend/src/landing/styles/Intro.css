@@ -8,28 +8,45 @@
   align-items: center;
   gap: 30px;
   cursor: pointer;
+  overflow-x: hidden;
+  padding: 0 2rem;
+  box-sizing: border-box;
 }
 
 /* Logo area */
 #logo-group {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  gap: 15px;
-}
-
-.logo-stack {
-  position: relative;
-}
-
-#hat {
-  width: 50px;
-  position: absolute;
-  top: -20px;
-  left: 10px;
+  max-width: calc(100vw - 4rem);
+  margin-bottom: 1rem;
+  gap: 1rem;
 }
 
 #kk-logo {
-  width: 70px;
+  width: 120px;
+  max-width: 60%;
+}
+
+#brand-text {
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  color: #22c55e;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+#brand-text span {
+  opacity: 0;
+  color: inherit;
+}
+
+#logo-group img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* Text */
