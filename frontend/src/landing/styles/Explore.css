@@ -185,9 +185,9 @@
 }
 
 .explore-bottom-btn-dark {
-  background: #0f172a;
+  background: #10b981;
   color: #f8fafc;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.24);
+  box-shadow: 0 18px 40px rgba(16, 185, 129, 0.24);
 }
 
 @media (max-width: 900px) {

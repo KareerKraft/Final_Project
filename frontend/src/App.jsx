@@ -22,6 +22,8 @@ import Help from "./landing/pages/Help";
 import PlacementGuide from "./landing/pages/PlacementGuide";
 import PlacementGuideDetail from "./landing/pages/PlacementGuideDetail";
 import Hackathons from "./landing/pages/Hackathons";
+import HackathonApply from "./landing/pages/HackathonApply";
+import HackathonApplied from "./landing/pages/HackathonApplied";
 import RoleSelect from "./pages/RoleSelect";
 import LandingLayout from "./landing/LandingLayout";  
 
@@ -72,6 +74,22 @@ const appRouter = createBrowserRouter([
     element: (
       <LandingLayout>
         <Hackathons />
+      </LandingLayout>
+    )
+  },
+  {
+    path: '/hackathons/apply',
+    element: (
+      <LandingLayout>
+        <HackathonApply />
+      </LandingLayout>
+    )
+  },
+  {
+    path: '/hackathons/applied',
+    element: (
+      <LandingLayout>
+        <HackathonApplied />
       </LandingLayout>
     )
   },
