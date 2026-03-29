@@ -470,6 +470,58 @@
   color: #f3fff6;
 }
 
+.extras-participant-section {
+  margin-top: 1rem;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 0.8rem;
+  padding: 1rem;
+  background: rgba(10, 28, 20, 0.5);
+}
+
+.extras-participant-card {
+  margin-bottom: 1rem;
+  background: rgba(14, 40, 24, 0.7);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 0.6rem;
+  padding: 0.8rem;
+}
+
+.extras-participant-card h4 {
+  margin: 0 0 0.6rem;
+  color: #a5ffd3;
+}
+
+.extras-note {
+  margin-top: 0.75rem;
+  padding: 0.6rem;
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 3px solid #10b981;
+  color: #cef7d2;
+}
+
+.extras-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f8fafc;
+  background: linear-gradient(90deg,#10b981,#059669);
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(16, 185, 129, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.extras-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(16, 185, 129, 0.45);
+}
+
 .extras-page-placement-guide {
   background:
     radial-gradient(circle at top left, rgba(217, 182, 255, 0.28), transparent 24%),
