@@ -7,6 +7,9 @@ export default function PlacementGuideDetail() {
   const { slug } = useParams();
   const guide = placementGuideMap[slug];
   const guideContent = placementGuideContent[slug] || {};
+  const pageClassName = guide?.theme
+    ? `extras-page extras-page-placement-guide extras-page-placement-guide-${guide.theme}`
+    : "extras-page extras-page-placement-guide";
   const items = Array.isArray(guideContent.resources)
     ? guideContent.resources
     : Array.isArray(guideContent.platforms)
@@ -22,7 +25,7 @@ export default function PlacementGuideDetail() {
 
   if (!guide) {
     return (
-      <main className="extras-page extras-page-placement-guide">
+      <main className={pageClassName}>
         <section className="extras-hero">
           <span className="extras-tag">Placement Preparation</span>
           <h1 className="extras-title">Guide page not found</h1>
@@ -39,7 +42,7 @@ export default function PlacementGuideDetail() {
   }
 
   return (
-    <main className="extras-page extras-page-placement-guide">
+    <main className={pageClassName}>
       <section className="extras-hero placement-guide-detail-hero">
         <span className="extras-tag">Placement Preparation</span>
         <h1 className="extras-title">{guide.title}</h1>

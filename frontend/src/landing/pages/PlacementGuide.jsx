@@ -26,7 +26,7 @@ export default function PlacementGuide() {
             <button
               key={item.slug}
               type="button"
-              className="extras-card placement-guide-card"
+              className={`extras-card placement-guide-card placement-guide-card-${item.theme}`}
               onClick={() => handleGuideClick(item.slug)}
             >
               <span className="extras-card-label">Preparation Track</span>
