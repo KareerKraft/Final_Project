@@ -9,7 +9,7 @@ function AboutUs() {
 
         <div className="content-grid">
           <div className="content-card">
-            <div className="card-icon">🎯</div>
+            <div className="card-icon"></div>
             <h3>Our Mission</h3>
             <p>
               We are dedicated to connecting talented professionals with their dream jobs. 
@@ -19,7 +19,7 @@ function AboutUs() {
           </div>
 
           <div className="content-card">
-            <div className="card-icon">🌟</div>
+            <div className="card-icon"></div>
             <h3>Why Choose Us</h3>
             <p>
               With thousands of job listings from top companies, an intuitive resume builder, 
@@ -29,7 +29,7 @@ function AboutUs() {
           </div>
 
           <div className="content-card">
-            <div className="card-icon">💪</div>
+            <div className="card-icon"></div>
             <h3>Our Features</h3>
             <p>
               • AI-powered resume building<br/>
@@ -40,7 +40,7 @@ function AboutUs() {
           </div>
 
           <div className="content-card">
-            <div className="card-icon">🚀</div>
+            <div className="card-icon"></div>
             <h3>Our Vision</h3>
             <p>
               To be the leading platform that transforms careers by providing opportunities 
