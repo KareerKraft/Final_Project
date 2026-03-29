@@ -185,6 +185,34 @@
   margin-bottom: 0.5rem;
 }
 
+.social-icons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  color: #1f2937;
+  font-size: 1.5rem;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.35);
+  background: rgba(255, 255, 255, 0.95);
+}
+
 .help-contact strong {
   color: #22c55e;
 }
