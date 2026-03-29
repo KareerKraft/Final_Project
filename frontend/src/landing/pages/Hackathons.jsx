@@ -82,13 +82,14 @@ export default function Hackathons() {
       <section className="extras-code-section">
         <div className="extras-section-card">
           <h2>How a Hackathon Works (Step-by-Step)</h2>
-          <ol className="extras-step-list">
+          <div className="extras-step-slider">
             {hackathonSteps.map((step, idx) => (
-              <li key={step}>
-                <strong>Step {idx + 1}:</strong> {step}
-              </li>
+              <div key={step} className="extras-slide-box" style={{ animationDelay: `${idx * 2}s` }}>
+                <h3>Step {idx + 1}</h3>
+                <p>{step}</p>
+              </div>
             ))}
-          </ol>
+          </div>
         </div>
 
         <div className="extras-section-card">
