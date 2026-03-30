@@ -1,12 +1,19 @@
 import { Link, useLocation } from 'react-router-dom';
+import { placementGuideMap } from '../data/placementGuideItems';
 import '../styles/Header.css';
 
 function Header() {
   const location = useLocation();
   const showLoginButton = location.pathname !== '/explore';
+  const isPlacementGuidePage = location.pathname.startsWith('/placement-guide');
+  const placementGuideSlug = location.pathname.split('/')[2];
+  const placementGuideTheme = placementGuideMap[placementGuideSlug]?.theme;
+  const placementGuideHeaderClass = placementGuideTheme
+    ? `header-placement-guide-${placementGuideTheme}`
+    : 'header-placement-guide';
 
   return (
-    <header className="header">
+    <header className={`header ${isPlacementGuidePage ? placementGuideHeaderClass : ''}`}>
       <div className="header-container">
         <div className="logo">
           <img src="/logo.png" alt="KK Logo" className="kk-logo-img" />

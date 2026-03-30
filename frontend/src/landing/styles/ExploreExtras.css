@@ -635,8 +635,22 @@
   color: #7d43dd;
 }
 
+.extras-page-placement-guide .extras-title {
+  color: #111111;
+}
+
 .extras-page-placement-guide .extras-description {
   color: rgba(47, 38, 69, 0.72);
+}
+
+.extras-page-placement-guide .extras-hero::after {
+  content: "";
+  display: block;
+  width: 88px;
+  height: 4px;
+  margin: 1rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e 0%, #8b5cf6 100%);
 }
 
 .extras-page-placement-guide-violet .extras-tag {

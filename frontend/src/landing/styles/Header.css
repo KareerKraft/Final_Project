@@ -9,6 +9,30 @@
   box-shadow: 0 2px 8px rgba(34, 197, 94, 0.1);
 }
 
+.header-placement-guide {
+  border-bottom: 2px solid #8b5cf6;
+}
+
+.header-placement-guide-violet {
+  border-bottom: 2px solid #8b5cf6;
+}
+
+.header-placement-guide-orange {
+  border-bottom: 2px solid #f59e0b;
+}
+
+.header-placement-guide-red {
+  border-bottom: 2px solid #ef4444;
+}
+
+.header-placement-guide-blue {
+  border-bottom: 2px solid #0284c7;
+}
+
+.header-placement-guide-green {
+  border-bottom: 2px solid #16a34a;
+}
+
 .header-container {
   width: 100%;
   display: flex;
