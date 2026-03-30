@@ -1,7 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../styles/Header.css';
 
 function Header() {
+  const location = useLocation();
+  const showLoginButton = location.pathname !== '/explore';
+
   return (
     <header className="header">
       <div className="header-container">
@@ -10,12 +13,15 @@ function Header() {
         </div>
         <nav className="nav-menu">
           <Link to="/explore" className="nav-link">HOME</Link>
+          <Link to="/explore#explore-features" className="nav-link">EXPLORE FEATURES</Link>
           <Link to="/AboutUs" className="nav-link">ABOUT US</Link>
           <Link to="/Help" className="nav-link">HELP</Link>
         </nav>
-        <div className="login-container" style={{ position: 'absolute', top: '10px', right: '10px' }}>
-          <button className="login-btn" onClick={() => window.location.href='/login'}>login</button>
-        </div>
+        {showLoginButton ? (
+          <div className="login-container" style={{ position: 'absolute', top: '10px', right: '10px' }}>
+            <button className="login-btn" onClick={() => window.location.href='/login'}>login</button>
+          </div>
+        ) : null}
       </div>
     </header>
   );
