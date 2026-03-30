@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { ImagePlus, LayoutGrid, MapPinned, Megaphone, Plus, Table2, Trash2, Upload } from "lucide-react";
 import { toast } from "sonner";
+import axios from "@/utils/axios";
+import { ANNOUNCEMENT_API_END_POINT } from "@/utils/constant";
 import Navbar from "../shared/Navbar";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -60,6 +62,13 @@ const createImageBlock = () => ({
   caption: "",
   files: [],
 });
+
+const serializeFiles = (files = []) =>
+  files.map((file) => ({
+    name: file.name,
+    mimeType: file.type || "",
+    size: file.size || 0,
+  }));
 
 const Textarea = ({ className = "", ...props }) => (
   <textarea
@@ -350,7 +359,52 @@ const AdminPosts = () => {
   };
 
   const publishCurrentDraft = () => {
-    toast.success(`Your ${selectedType} announcement draft is ready.`);
+    const payload =
+      selectedType === "shortlisted"
+        ? {
+            type: selectedType,
+            title: shortlistedDraft.title,
+            description: shortlistedDraft.description,
+            links: shortlistedDraft.links,
+            files: serializeFiles(shortlistedDraft.files),
+            blocks: [],
+          }
+        : selectedType === "venue"
+          ? {
+              type: selectedType,
+              title: venueDraft.title,
+              description: venueDraft.description,
+              links: venueDraft.links,
+              files: serializeFiles(venueDraft.files),
+              blocks: [],
+            }
+          : {
+              type: selectedType,
+              title: customDraft.title,
+              summary: customDraft.summary,
+              links: customDraft.links,
+              files: serializeFiles(customDraft.files),
+              blocks: customDraft.blocks.map((block) => ({
+                ...block,
+                files: serializeFiles(block.files || []),
+              })),
+            };
+
+    if (!payload.title?.trim()) {
+      toast.error("Please add a title before publishing.");
+      return;
+    }
+
+    axios
+      .post(`${ANNOUNCEMENT_API_END_POINT}/create`, payload, { withCredentials: true })
+      .then((res) => {
+        if (res.data.success) {
+          toast.success(res.data.message || "Announcement posted successfully.");
+        }
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message || "Failed to publish announcement.");
+      });
   };
 
   return (

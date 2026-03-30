@@ -6,10 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
+import { Bell } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { setAllJobs } from '@/redux/jobSlice';
 import axios from '@/utils/axios';
-import { APPLICATION_API_END_POINT, JOB_API_END_POINT } from '@/utils/constant';
+import { ANNOUNCEMENT_API_END_POINT, APPLICATION_API_END_POINT, JOB_API_END_POINT } from '@/utils/constant';
 import { toast } from 'sonner';
 
 const jobRoles = ["All", "Frontend Developer", "Backend Developer", "FullStack Developer"];
@@ -25,6 +26,7 @@ const Jobs = () => {
     const [isApplied, setIsApplied] = useState(false);
     const [selectedJobRole, setSelectedJobRole] = useState("All");
     const [selectedLocation, setSelectedLocation] = useState("All");
+    const [latestUpdates, setLatestUpdates] = useState([]);
 
     useEffect(() => {
         let filtered = allJobs;
@@ -61,6 +63,26 @@ const Jobs = () => {
             setIsApplied(hasAlreadyApplied || false);
         }
     }, [selectedJob, user?._id]);
+
+    useEffect(() => {
+        const fetchLatestAnnouncements = async () => {
+            try {
+                const res = await axios.get(`${ANNOUNCEMENT_API_END_POINT}/latest`, {
+                    withCredentials: true,
+                });
+
+                if (res.data.success) {
+                    setLatestUpdates(res.data.announcements || []);
+                }
+            } catch (error) {
+                console.log("Failed to load announcements", error);
+            }
+        };
+
+        if (user?.role === "student") {
+            fetchLatestAnnouncements();
+        }
+    }, [user?.role]);
 
     const applyJobHandler = async () => {
         try {
@@ -180,7 +202,7 @@ const Jobs = () => {
             {/* Top Search Bar */}
             <div className='bg-white border-b'>
                 <div className='max-w-7xl mx-auto py-4 px-5'>
-                    <div className='flex gap-4 items-center'>
+                    <div className='flex gap-4 items-end'>
                         {/* Job Role Dropdown */}
                         <div className='flex-1'>
                             <label className='text-sm text-gray-600 block mb-2'>Job Role</label>
@@ -208,6 +230,25 @@ const Jobs = () => {
                                 ))}
                             </select>
                         </div>
+
+                        {user?.role === "student" ? (
+                            <div>
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    className='relative h-11 rounded-full border-green-200 px-4'
+                                    onClick={() => navigate('/updates')}
+                                >
+                                    <Bell className='h-4 w-4 text-[#499428]' />
+                                    <span>Latest Updates</span>
+                                    {latestUpdates.length > 0 ? (
+                                        <span className='absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#499428] px-1 text-[10px] font-bold text-white'>
+                                            {latestUpdates.length}
+                                        </span>
+                                    ) : null}
+                                </Button>
+                            </div>
+                        ) : null}
                     </div>
                 </div>
             </div>
